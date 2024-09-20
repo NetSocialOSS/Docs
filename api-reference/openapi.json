@@ -86,7 +86,6 @@
         }
       }
     },
-    
     "/stats/users/@all": {
       "get": {
         "summary": "Get total count of registered users",
@@ -103,6 +102,42 @@
                     "total_registered_user": {
                       "type": "integer",
                       "description": "The total count of registered users.",
+                      "example": 500
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stats/coterie/@all": {
+      "get": {
+        "summary": "Get total count of all the coteries",
+        "description": "Returns the total count of all the coteries that can be found on netsocial",
+        "tags": ["Statistics"],
+        "responses": {
+          "200": {
+            "description": "Successful response with the total count of coterie.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "total_coteries": {
+                      "type": "integer",
+                      "description": "The total count of coteries.",
                       "example": 500
                     }
                   }

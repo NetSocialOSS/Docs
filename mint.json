@@ -53,22 +53,22 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api/introduction"
+        "api-reference/introduction"
       ]
     },
     {
       "group": "User",
       "pages": [
-        "api/endpoint/user/username"
+        "api-reference/endpoint/user/username"
         
       ]
     },
     {
       "group": "Stats",
       "pages": [
-        "api/endpoint/stats/partnercount",
-        "api/endpoint/stats/usercount",
-        "api/endpoint/stats/postcount"
+        "api-reference/endpoint/stats/partnercount",
+        "api-reference/endpoint/stats/usercount",
+        "api-reference/endpoint/stats/postcount"
       ]
     }
   ],
