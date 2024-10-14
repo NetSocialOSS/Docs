@@ -40,7 +40,7 @@
     {
       "name": "Blog",
       "icon": "newspaper",
-      "url": "https://netsocial.app/blog"
+      "url": "https://netsocial.app/blogs"
     }
   ],
   "navigation": [
@@ -57,9 +57,35 @@
       ]
     },
     {
+      "group": "Coteries",
+      "pages": [
+        "api-reference/endpoint/coterie/getallcoterie",
+         "api-reference/endpoint/coterie/getcoteriebyname"      
+      ]
+    },
+    {
       "group": "User",
       "pages": [
-        "api-reference/endpoint/user/username"
+        "api-reference/endpoint/user/username"       
+      ]
+    },
+    {
+      "group": "Post",
+      "pages": [
+        "api-reference/endpoint/post/getpostbyid",
+        "api-reference/endpoint/post/getallpost"       
+      ]
+    },
+    {
+      "group": "Blog",
+      "pages": [
+        "api-reference/endpoint/blog/blogpost"        
+      ]
+    },
+    {
+      "group": "Partner",
+      "pages": [
+        "api-reference/endpoint/partners/partners"
         
       ]
     },
@@ -68,6 +94,7 @@
       "pages": [
         "api-reference/endpoint/stats/partnercount",
         "api-reference/endpoint/stats/usercount",
+        "api-reference/endpoint/stats/coteriecount",
         "api-reference/endpoint/stats/postcount"
       ]
     }

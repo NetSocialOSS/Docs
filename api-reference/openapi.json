@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "OpenAPI SocialFlux Stats",
-    "description": "A sample API that provides statistics for the SocialFlux database",
+    "title": "NetSocial",
+    "description": "A simple openapi spec that provides info about routes",
     "license": {
       "name": "MIT"
     },
@@ -10,14 +10,14 @@
   },
   "servers": [
     {
-      "url": "https://api.netsocial.app"
+      "url": "https://critical-vale-miya25-d21bf761.koyeb.app"
     }
   ],
   "paths": {
     "/stats/partners/@all": {
       "get": {
         "summary": "Get total count of partners",
-        "description": "Returns the total count of partners in the SocialFlux database.",
+        "description": "Returns the total count of partners.",
         "tags": ["Statistics"],
         "responses": {
           "200": {
@@ -50,10 +50,148 @@
         }
       }
     },
+    "/partners/@all": {
+    "get": {
+      "summary": "Retrieve all partners",
+      "description": "Fetches all partner data from the system.",
+      "tags": ["Partners"],
+      "responses": {
+        "200": {
+          "description": "A list of all partners",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "banner": {
+                      "type": "string",
+                      "description": "URL of the banner image for the partner"
+                    },
+                    "logo": {
+                      "type": "string",
+                      "description": "URL of the logo image for the partner"
+                    },
+                    "title": {
+                      "type": "string",
+                      "description": "Title or name of the partner"
+                    },
+                    "text": {
+                      "type": "string",
+                      "description": "Description or information about the partner"
+                    },
+                    "link": {
+                      "type": "string",
+                      "description": "URL link to the partner's website or profile"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "500": {
+          "description": "Internal server error",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "error": {
+                    "type": "string",
+                    "description": "Error message describing the failure"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+    "/blog/posts/@all": {
+      "get": {
+        "summary": "Retrieve all blog posts",
+        "description": "Fetches all blog posts from the system.",
+        "tags": ["Blogs"],
+        "responses": {
+          "200": {
+            "description": "A list of all blog posts",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "slug": {
+                        "type": "string",
+                        "description": "Unique identifier for the blog post"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Title of the blog post"
+                      },
+                      "date": {
+                        "type": "string",
+                        "format": "date",
+                        "description": "Date when the post was published"
+                      },
+                      "authorName": {
+                        "type": "string",
+                        "description": "Name of the author"
+                      },
+                      "authoravatar": {
+                        "type": "string",
+                        "description": "URL to the author's avatar image"
+                      },
+                      "overview": {
+                        "type": "string",
+                        "description": "Short overview of the blog post"
+                      },
+                      "content": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "body": {
+                              "type": "string",
+                              "description": "Body content of the blog post"
+                            }
+                          }
+                        },
+                        "description": "Content of the blog post in multiple sections"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Error message describing the failure"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/stats/posts/@all": {
       "get": {
         "summary": "Get total count of posts",
-        "description": "Returns the total count of posts in the SocialFlux database.",
+        "description": "Returns the total count of posts.",
         "tags": ["Statistics"],
         "responses": {
           "200": {
@@ -89,7 +227,7 @@
     "/stats/users/@all": {
       "get": {
         "summary": "Get total count of registered users",
-        "description": "Returns the total count of registered users in the SocialFlux database.",
+        "description": "Returns the total count of registered users.",
         "tags": ["Statistics"],
         "responses": {
           "200": {
@@ -158,112 +296,70 @@
         }
       }
     },
-    "/user/{username}": {
-      "get": {
-        "summary": "Get user details by username",
-        "description": "Retrieves details of a user by their username from the SocialFlux database.",
-        "tags": ["Users"],
-        "parameters": [
-          {
-            "name": "username",
-            "in": "path",
-            "required": true,
-            "description": "The username of the user to retrieve",
+    "/coterie/@all": {
+  "get": {
+    "summary": "Get all coteries",
+    "description": "Retrieves all coteries with their details such as members count, posts count, and additional information.",
+    "tags": ["Coteries"],
+    "responses": {
+      "200": {
+        "description": "Successful response with a list of coteries",
+        "content": {
+          "application/json": {
             "schema": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string",
+                    "description": "Name of the coterie"
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Description of the coterie"
+                  },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Date and time when the coterie was created"
+                  },
+                  "isVerified": {
+                    "type": "boolean",
+                    "description": "Indicates if the coterie is verified"
+                  },
+                  "TotalMembers": {
+                    "type": "integer",
+                    "description": "Total number of members in the coterie"
+                  },
+                  "PostsCount": {
+                    "type": "integer",
+                    "description": "Total number of posts in the coterie"
+                  },
+                  "avatar": {
+                    "type": "string",
+                    "description": "URL of the coterie's avatar image"
+                  },
+                  "banner": {
+                    "type": "string",
+                    "description": "URL of the coterie's banner image"
+                  }
+                }
+              }
             }
           }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful response with user details and posts",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "username": {
-                      "type": "string",
-                      "description": "Username of the user"
-                    },
-                    "isVerified": {
-                      "type": "boolean",
-                      "description": "Indicates if the user is verified"
-                    },
-                    "isOrganisation": {
-                      "type": "boolean",
-                      "description": "Indicates if the user is an organization"
-                    },
-                    "isDeveloper": {
-                      "type": "boolean",
-                      "description": "Indicates if the user is a developer"
-                    },
-                    "isOwner": {
-                      "type": "boolean",
-                      "description": "Indicates if the user is an owner"
-                    },
-                    "isPartner": {
-                      "type": "boolean",
-                      "description": "Indicates if the user is a partner"
-                    },
-                    "displayname": {
-                      "type": "string",
-                      "description": "Display name of the user"
-                    },
-                    "bio": {
-                      "type": "string",
-                      "description": "Bio of the user"
-                    },
-                    "createdAt": {
-                      "type": "string",
-                      "format": "date-time",
-                      "description": "Date and time when the user account was created"
-                    },
-                    "links": {
-                      "type": "array",
-                      "items": {
-                        "type": "string"
-                      },
-                      "description": "Links associated with the user"
-                    },
-                    "posts": {
-                      "type": "array",
-                      "items": {
-                        "type": "object",
-                        "properties": {
-                          "_id": {
-                            "type": "string",
-                            "description": "ID of the post"
-                          },
-                          "title": {
-                            "type": "string",
-                            "description": "Title of the post"
-                          },
-                          "content": {
-                            "type": "string",
-                            "description": "Content of the post"
-                          },
-                          "author": {
-                            "type": "string",
-                            "description": "Username of the post author"
-                          },
-                          "createdAt": {
-                            "type": "string",
-                            "format": "date-time",
-                            "description": "Date and time when the post was created"
-                          },
-                          "hearts": {
-                            "type": "array",
-                            "items": {
-                              "type": "string"
-                            },
-                            "description": "List of usernames who liked the post"
-                          }
-                        }
-                      },
-                      "description": "Array of posts made by the user"
-                    }
-                  }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message"
                 }
               }
             }
@@ -271,6 +367,658 @@
         }
       }
     }
+  }
+},
+"/coterie/{name}": {
+  "get": {
+    "summary": "Get coterie by name",
+    "description": "Fetches details of a coterie by its name, including owner details, members, posts, and metadata.",
+    "tags": ["Coteries"],
+    "parameters": [
+      {
+        "name": "name",
+        "in": "path",
+        "required": true,
+        "description": "The name of the coterie to retrieve",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful response with coterie details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "The name of the coterie"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "A brief description of the coterie"
+                },
+                "owner": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "Username of the coterie owner"
+                    },
+                    "profilePicture": {
+                      "type": "string",
+                      "description": "URL of the owner's profile picture"
+                    },
+                    "profileBanner": {
+                      "type": "string",
+                      "description": "URL of the owner's profile banner"
+                    }
+                  }
+                },
+                "members": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "username": {
+                        "type": "string",
+                        "description": "Username of the member"
+                      },
+                      "profilePicture": {
+                        "type": "string",
+                        "description": "URL of the member's profile picture"
+                      }
+                    }
+                  },
+                  "description": "List of members in the coterie"
+                },
+                "TotalMembers": {
+                  "type": "integer",
+                  "description": "The total number of members in the coterie"
+                },
+                "TotalPosts": {
+                  "type": "integer",
+                  "description": "The total number of posts in the coterie"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Date and time when the coterie was created"
+                },
+                "Post": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "ID of the post"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Title of the post"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "Content of the post"
+                      },
+                      "image": {
+                        "type": "string",
+                        "description": "Image associated with the post"
+                      },
+                      "hearts": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "username": {
+                              "type": "string",
+                              "description": "Username of the user who liked the post"
+                            },
+                            "profilePicture": {
+                              "type": "string",
+                              "description": "URL of the user's profile picture"
+                            }
+                          }
+                        },
+                        "description": "List of users who liked the post"
+                      },
+                      "timeAgo": {
+                        "type": "string",
+                        "description": "Time elapsed since the post was created"
+                      },
+                      "commentNumber": {
+                        "type": "integer",
+                        "description": "Number of comments on the post"
+                      },
+                      "authorDetails": {
+                        "type": "object",
+                        "properties": {
+                          "username": {
+                            "type": "string",
+                            "description": "Username of the author"
+                          },
+                          "isVerified": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is verified"
+                          },
+                          "isOrganisation": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is an organization"
+                          },
+                          "isDeveloper": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is a developer"
+                          },
+                          "isPartner": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is a partner"
+                          },
+                          "isOwner": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is an owner"
+                          },
+                          "profileBanner": {
+                            "type": "string",
+                            "description": "URL of the author's profile banner"
+                          },
+                          "profilePicture": {
+                            "type": "string",
+                            "description": "URL of the author's profile picture"
+                          }
+                        },
+                        "description": "Details of the post author"
+                      }
+                    }
+                  },
+                  "description": "Array of posts in the coterie"
+                },
+                "avatar": {
+                  "type": "string",
+                  "description": "URL of the coterie's avatar image"
+                },
+                "banner": {
+                  "type": "string",
+                  "description": "URL of the coterie's banner image"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Coterie not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message indicating that the coterie was not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message indicating an internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/posts/{id}": {
+  "get": {
+    "summary": "Get post by ID",
+    "description": "Fetches a post by its ID, including author details, comments, and metadata.",
+    "tags": ["Posts"],
+    "parameters": [
+      {
+        "name": "id",
+        "in": "path",
+        "required": true,
+        "description": "The ID of the post to retrieve",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful response with post details",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "_id": {
+                  "type": "string",
+                  "description": "The ID of the post"
+                },
+                "title": {
+                  "type": "string",
+                  "description": "Title of the post"
+                },
+                "content": {
+                  "type": "string",
+                  "description": "Content of the post"
+                },
+                "authorDetails": {
+                  "type": "object",
+                  "properties": {
+                    "username": {
+                      "type": "string",
+                      "description": "Username of the post author"
+                    },
+                    "isVerified": {
+                      "type": "boolean",
+                      "description": "Indicates if the author is verified"
+                    },
+                    "isOrganisation": {
+                      "type": "boolean",
+                      "description": "Indicates if the author is an organization"
+                    },
+                    "profilePicture": {
+                      "type": "string",
+                      "description": "URL of the author's profile picture"
+                    },
+                    "isDeveloper": {
+                      "type": "boolean",
+                      "description": "Indicates if the author is a developer"
+                    },
+                    "isPartner": {
+                      "type": "boolean",
+                      "description": "Indicates if the author is a partner"
+                    },
+                    "isOwner": {
+                      "type": "boolean",
+                      "description": "Indicates if the author is an owner"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time",
+                      "description": "Date and time when the author was created"
+                    }
+                  },
+                  "description": "Details of the post author"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Date and time when the post was created"
+                },
+                "hearts": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "description": "Usernames of users who liked the post"
+                  },
+                  "description": "List of users who liked the post"
+                },
+                "comments": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "ID": {
+                        "type": "string",
+                        "description": "ID of the comment"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "Content of the comment"
+                      },
+                      "isVerified": {
+                        "type": "boolean",
+                        "description": "Indicates if the comment's author is verified"
+                      },
+                      "isOrganisation": {
+                        "type": "boolean",
+                        "description": "Indicates if the comment's author is an organization"
+                      },
+                      "isPartner": {
+                        "type": "boolean",
+                        "description": "Indicates if the comment's author is a partner"
+                      },
+                      "timeAgo": {
+                        "type": "string",
+                        "description": "How long ago the comment was posted"
+                      },
+                      "authorName": {
+                        "type": "string",
+                        "description": "Username of the comment's author"
+                      },
+                      "isOwner": {
+                        "type": "boolean",
+                        "description": "Indicates if the comment's author is an owner"
+                      },
+                      "profilePicture": {
+                        "type": "string",
+                        "description": "URL of the comment's author's profile picture"
+                      },
+                      "isDeveloper": {
+                        "type": "boolean",
+                        "description": "Indicates if the comment's author is a developer"
+                      },
+                      "replies": {
+                        "type": "array",
+                        "items": {
+                          "type": "string",
+                          "description": "Replies to the comment"
+                        }
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date and time when the comment was created"
+                      }
+                    }
+                  },
+                  "description": "List of comments on the post"
+                },
+                "image": {
+                  "type": "string",
+                  "description": "URL of the post's image"
+                }
+              }
+            }
+          }
+        }
+      },
+      "404": {
+        "description": "Post not found",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message indicating that the post was not found"
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message indicating an internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+"/posts/@all": {
+  "get": {
+    "summary": "Get all posts",
+    "description": "Fetches all posts from non-private users, sorted by creation date.",
+    "tags": ["Posts"],
+    "responses": {
+      "200": {
+        "description": "Successful response with all visible posts",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "_id": {
+                    "type": "string",
+                    "description": "The ID of the post"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Title of the post"
+                  },
+                  "content": {
+                    "type": "string",
+                    "description": "Content of the post"
+                  },
+"authorDetails": {
+                        "type": "object",
+                        "properties": {
+                          "username": {
+                            "type": "string",
+                            "description": "Username of the author"
+                          },
+                          "isVerified": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is verified"
+                          },
+                          "isOrganisation": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is an organization"
+                          },
+                          "isDeveloper": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is a developer"
+                          },
+                          "isPartner": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is a partner"
+                          },
+                          "isOwner": {
+                            "type": "boolean",
+                            "description": "Indicates if the author is an owner"
+                          },
+                          "profileBanner": {
+                            "type": "string",
+                            "description": "URL of the author's profile banner"
+                          },
+                          "profilePicture": {
+                            "type": "string",
+                            "description": "URL of the author's profile picture"
+                          }
+                        },
+                        "description": "Details of the post author"
+                      },
+                  "createdAt": {
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Date and time when the post was created"
+                  },
+                  "timeAgo": {
+                    "type": "string",
+                    "description": "How long ago the post was created"
+                  },
+                  "coterie": {
+                    "type": "string",
+                    "description": "In which coterie the post was made from"
+                  },
+                  "hearts": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "Usernames of users who liked the post"
+                    },
+                    "description": "List of users who liked the post"
+                  },
+                  "commentNumber": {
+                    "type": "integer",
+                    "description": "Number of comments on the post"
+                  },
+                  "image": {
+                    "type": "array",
+                    "items": {
+                      "type": "string",
+                      "description": "URL of the post's image, if any"
+                    },
+                    "description": "URL of the post's image, if any"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "500": {
+        "description": "Internal Server Error",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "error": {
+                  "type": "string",
+                  "description": "Error message indicating an internal server error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},
+
+    "/user/{username}": {
+  "get": {
+    "summary": "Get user details by username",
+    "description": "Retrieves details of a user by their username.",
+    "tags": ["Users"],
+    "parameters": [
+      {
+        "name": "username",
+        "in": "path",
+        "required": true,
+        "description": "The username of the user to retrieve",
+        "schema": {
+          "type": "string"
+        }
+      }
+    ],
+    "responses": {
+      "200": {
+        "description": "Successful response with user details and posts",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "username": {
+                  "type": "string",
+                  "description": "Username of the user"
+                },
+                "isVerified": {
+                  "type": "boolean",
+                  "description": "Indicates if the user is verified"
+                },
+                "isOrganisation": {
+                  "type": "boolean",
+                  "description": "Indicates if the user is an organization"
+                },
+                "isDeveloper": {
+                  "type": "boolean",
+                  "description": "Indicates if the user is a developer"
+                },
+                "profileBanner": {
+                  "type": "string",
+                  "description": "Users banner"
+                },
+                "profilePicture": {
+                  "type": "string",
+                  "description": "Users profile picture"
+                },
+                "isOwner": {
+                  "type": "boolean",
+                  "description": "Indicates if the user is an owner"
+                },
+                "isPartner": {
+                  "type": "boolean",
+                  "description": "Indicates if the user is a partner"
+                },
+                "displayname": {
+                  "type": "string",
+                  "description": "Display name of the user"
+                },
+                "bio": {
+                  "type": "string",
+                  "description": "Bio of the user"
+                },
+                "createdAt": {
+                  "type": "string",
+                  "format": "date-time",
+                  "description": "Date and time when the user account was created"
+                },
+                "links": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  },
+                  "description": "Links associated with the user"
+                },
+                "posts": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "description": "ID of the post"
+                      },
+                      "title": {
+                        "type": "string",
+                        "description": "Title of the post"
+                      },
+                      "content": {
+                        "type": "string",
+                        "description": "Content of the post"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time",
+                        "description": "Date and time when the post was created"
+                      },
+                      "hearts": {
+                        "type": "array",
+                        "items": {
+                          "type": "string"
+                        },
+                        "description": "List of usernames who liked the post"
+                      }
+                    }
+                  },
+                  "description": "Array of posts made by the user"
+                }
+              }
+            }
+          }
+        }
+      }
+      
+    }
+  }
+}
   },
   "components": {
     "schemas": {
