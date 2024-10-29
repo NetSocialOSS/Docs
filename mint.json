@@ -51,6 +51,15 @@
       ]
     },
     {
+      "group": "Quick Start Guide",
+      "pages": [
+        "Quick-Start-Guide/introduction",
+        "Quick-Start-Guide/SignUp",
+        "Quick-Start-Guide/Login",
+        "Quick-Start-Guide/Homepage"
+      ]
+    },
+    {
       "group": "API Documentation",
       "pages": [
         "api-reference/introduction"
